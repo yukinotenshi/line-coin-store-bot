@@ -4,7 +4,7 @@ from appium import webdriver
 import time
 
 
-class StartHandler(Handler):
+'''class StartHandler(Handler):
     def could_handle(self, sm):
         return sm.data['first_time']
 
@@ -54,7 +54,23 @@ class IDInputHandler(Handler):
         id_input.send_keys(sm.data['target'])
 
         search_btn = driver.find_element_by_id('jp.naver.line.android:id/addfriend_by_userid_search_button_image')
-        search_btn.click()
+        search_btn.click()'''
+
+
+class StartIntentHandler(Handler):
+    def could_handle(self, sm):
+        return sm.data['first_time']
+
+    def handle(self, sm):
+        driver: webdriver.Remote = sm.data['driver']
+        driver.execute_script("mobile:deepLink", {
+            "url": "line://ti/p/~" + sm.data['target'],
+            "package": "jp.naver.line.android"
+        })
+        sm.data['first_time'] = False
+
+        time.sleep(3)
+        driver.hide_keyboard()
 
 
 class NotFoundHandler(Handler):
@@ -98,10 +114,7 @@ class FinalHandler(Handler):
 
 
 HANDLERS = [
-    StartHandler(),
-    AddFriendHandler(),
-    SearchHandler(),
+    StartIntentHandler(),
     NotFoundHandler(),
-    FinalHandler(),
-    IDInputHandler()
+    FinalHandler()
 ]

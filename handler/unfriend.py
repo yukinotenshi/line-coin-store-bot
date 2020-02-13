@@ -52,12 +52,9 @@ class BlockHandler(Handler):
 
 
 HANDLERS = [
-    StartHandler(),
-    AddFriendHandler(),
-    SearchHandler(),
+    StartIntentHandler(),
     NotFoundHandler(),
     OpenChatHandler(),
-    IDInputHandler(),
     ChatMenuHandler(),
     BlockHandler()
 ]

@@ -4,7 +4,7 @@ from appium import webdriver
 import time
 
 
-class StartHandler(Handler):
+'''class StartHandler(Handler):
     def could_handle(self, sm):
         print(sm.data['first_time'])
         return sm.data['first_time']
@@ -68,6 +68,20 @@ class StickerInputHandler(Handler):
         sm.data['sticker_name'] = sticker_name
         print(sticker_name)
         sticker_name.click()
+'''
+
+
+class StartIntentHandler(Handler):
+    def could_handle(self, sm):
+        return sm.data['first_time']
+
+    def handle(self, sm):
+        driver: webdriver.Remote = sm.data['driver']
+        driver.execute_script("mobile:deepLink", {
+            "url": sm.data['sticker_link'],
+            "package": "jp.naver.line.android"
+        })
+        sm.data['first_time'] = False
 
 
 class BuyStickerHandler(Handler):
@@ -130,10 +144,7 @@ class GiftHandler(Handler):
 
 
 HANDLERS = [
-    StartHandler(),
-    StickerShopHandler(),
-    SearchHandler(),
-    StickerInputHandler(),
+    StartIntentHandler(),
     BuyStickerHandler(),
     ChooseFriendHandler(),
     GiftHandler()

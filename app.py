@@ -26,10 +26,12 @@ def open_db():
 def submit_order():
     headers = request.headers
     if headers['Authorization'] != os.getenv("WEBHOOK_PSWD"):
-        return
+        return ""
 
     data = request.json
     data['order_id'] = data['id']
+    del data['id']
+    del data['status']
     order = Order(**data)
     order.save()
 

@@ -25,5 +25,4 @@ class Order(BaseModel):
     order_id = pw.IntegerField()
     items = pw.CharField()
     target_id = pw.CharField()
-    status = pw.CharField()
     is_processing = pw.BooleanField(default=False)
