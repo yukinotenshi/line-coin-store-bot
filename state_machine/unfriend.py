@@ -1,9 +1,9 @@
 from state_machine.LINE import LineStateMachine
-from handler.add_friend import HANDLERS
+from handler.unfriend import HANDLERS
 import time
 
 
-class AddFriendStateMachine(LineStateMachine):
+class UnfriendStateMachine(LineStateMachine):
     def __init__(self, target):
         super().__init__()
         self.handlers = HANDLERS

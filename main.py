@@ -1,8 +1,9 @@
 import dotenv
 dotenv.load_dotenv()
 
-from state_machine.buy_sticker import BuyStickerStateMachine
+from state_machine.unfriend import UnfriendStateMachine
 
 
-bssm = BuyStickerStateMachine()
-bssm.execute()
+usm = UnfriendStateMachine()
+usm.execute()
+

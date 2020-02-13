@@ -51,7 +51,7 @@ class IDInputHandler(Handler):
         driver: webdriver.Remote = sm.data['driver']
         id_input = driver.find_element_by_id('jp.naver.line.android:id/addfriend_by_userinfo_search_text')
         id_input.clear()
-        id_input.send_keys("blxcklisted")
+        id_input.send_keys(sm.data['target'])
 
         search_btn = driver.find_element_by_id('jp.naver.line.android:id/addfriend_by_userid_search_button_image')
         search_btn.click()
@@ -87,7 +87,7 @@ class FinalHandler(Handler):
         sm.data['name'] = name.text
 
         add_btn = driver.find_element_by_id('jp.naver.line.android:id/addfriend_add_button')
-        if add_btn.text == "Add":
+        if add_btn.text == "Add" or add_btn.text == "Chat":
             add_btn.click()
 
         driver.press_keycode(4)
